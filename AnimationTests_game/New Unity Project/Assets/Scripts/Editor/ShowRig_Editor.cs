@@ -7,17 +7,57 @@ using System.Linq;
 public class ShowRig_Editor : Editor {
 
 
-    //ShowRig selfScript;
+    ShowRig selfScript;
 
     void OnEnable() {
-        //selfScript = (ShowRig)target;
+        selfScript = (ShowRig)target;
 
         //SceneView.onSceneGUIDelegate += DrawRigFunction;
     }
 
+    /*
+    public override void OnInspectorGUI() {
+        base.OnInspectorGUI();
+
+        if (GUILayout.Button("Refresh Rig Components")) {
+            foreach (Transform tfChild in selfScript.transform) {
+                if (tfChild.tag == "RigJoint") {
+                    tfChild.gameObject.AddComponent<QuickSelect>();
+                }
+                else if (tfChild.gameObject.GetComponent<QuickSelect>() != null) {
+                    GameObject.DestroyImmediate(tfChild.gameObject.GetComponent<QuickSelect>());
+                }
+            }
+        }
+    }
+    */
+
+    /*
+    [DrawGizmo(GizmoType.NotInSelectionHierarchy)]
+    static void SelectRigJoint(ShowRig script, GizmoType gizmoType) {
+
+        foreach (Transform tfChild in script.transform) {
+
+            if (tfChild.tag == "RigJoint") {
+
+                if ( Handles.Button(tfChild.position,
+                                     Quaternion.identity,
+                                     10.0f,
+                                     10.0f,
+                                     Handles.ArrowCap)) {
+                    Debug.Log("vaasdf");
+                }
+            }
+        }
+        
+    }
+    */
+
+
     //void OnSceneGUI() {
     [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.InSelectionHierarchy)]
     static void DrawRigFunction(Transform objTransform, GizmoType gizmoType) {
+
 
         List<GameObject> selectedGameobjects = Selection.gameObjects.ToList<GameObject>();
         List<GameObject> childrenGameobjects = new List<GameObject>();
@@ -82,7 +122,7 @@ public class ShowRig_Editor : Editor {
                                Handles.SphereCap,
                                0.0f);
                 */
-                /*
+                
                 bool pressed = Handles.Button(tf.position,
                                Quaternion.identity,
                                rigSphereSize,
@@ -94,13 +134,13 @@ public class ShowRig_Editor : Editor {
                     Debug.Log("boom");
 
                 }
-                */
-
+                
+                /*
                 Handles.SphereCap(0,
                                   tf.position,
                                   Quaternion.identity,
                                   rigSphereSize);
-
+                */
                 //DRAW CONNECTIONS TO CHILD JOINTS
 
                 if (Handles.color == selectedRigColor) { Handles.color = childColor; }
@@ -119,7 +159,7 @@ public class ShowRig_Editor : Editor {
                 
 
             }
-
+            
 
             
 
